@@ -49,7 +49,6 @@
 
   // Dynamically set container height to match video aspect ratio
   function setContainerAspect() {
-    // Wait for video metadata to load
     video.addEventListener('loadedmetadata', () => {
       const aspect = video.videoWidth / video.videoHeight;
       const width = container.offsetWidth;
