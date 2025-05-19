@@ -22,6 +22,9 @@
   let pointers = {};
   let initialDist = 0, initialScale = 1;
 
+  // Prevent default browser drag of the overlay image
+  overlayEl.addEventListener('dragstart', e => e.preventDefault());
+
   function setOverlayTransform() {
     if (currentIndex === 0) {
       overlayEl.style.transform = `translate(${overlayPos.x}px,${overlayPos.y}px) scale(${overlayScale})`;
@@ -45,6 +48,8 @@
       overlayEl.style.pointerEvents = 'none';
       overlayEl.style.touchAction = '';
     }
+    // Always make overlay visible in preview
+    overlayEl.style.display = 'block';
   }
 
   // Dynamically set container height to match video aspect ratio
@@ -179,6 +184,8 @@
     [canvas, download, retakeBtn].forEach(el => el.style.display = 'none');
     video.style.display = 'block';
     updatePreview();
+    // Make overlay visible again
+    overlayEl.style.display = 'block';
     [prevBtn, nextBtn, flipBtn, capture].forEach(el => el.style.display = el.classList.contains('nav-arrow') ? 'flex' : 'inline-flex');
   });
 })();
